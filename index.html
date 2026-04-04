@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@100..900&display=swap" rel="stylesheet">
+
+    <title>শ্রীমদ্ভগবদ্গীতা</title>
+    <style>
+        :root {
+            --bg-color: #000000; 
+            --card-bg: #0a0a0a;
+            --gold-light: #fcf6ba;
+            --gold-mid: #bf953f;
+            --gold-deep: #8a6d3b;
+            --premium-ease: cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Noto Sans Bengali", sans-serif;
+            -webkit-tap-highlight-color: #00000000;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px; 
+            width: 100%;
+            position: relative; /* Essential for torch positioning */
+            padding-top: 50px;
+        }
+
+        /* --- THE TORCH EFFECT --- */
+        .torch-light {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 300px;
+            background: radial-gradient(
+                circle at 50% 0%, 
+                rgba(252, 246, 186, 0.15) 0%, 
+                rgba(191, 149, 63, 0.05) 40%, 
+                transparent 70%
+            );
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(20px);
+        }
+
+        .main-title {
+            font-size: clamp(2rem, 8vw, 8rem);
+            font-weight: 800;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            
+            background: linear-gradient(
+                to bottom, 
+                var(--gold-light) 0%, 
+                var(--gold-mid) 50%, 
+                var(--gold-deep) 100%
+            );
+            
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            
+            /* Enhanced shadow for a "lit" look */
+            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.8));
+            letter-spacing: 1px;
+        }
+
+        /* Adding a subtle floor glow beneath the title */
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 40%;
+            height: 2px;
+            background: radial-gradient(circle, var(--gold-mid), transparent);
+            transform: translateX(-50%);
+            opacity: 0.3;
+        }
+
+        /* --- REST OF THE LAYOUT --- */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            width: 100%;
+            max-width: 90%;
+        }
+
+        .chapter {
+            position: relative;
+            background: var(--card-bg);
+            padding: 70px 30px;
+            text-align: center;
+            border-radius: 12px;
+            overflow: hidden; 
+            cursor: pointer;
+            border: 1px solid #1a1a1a;
+            transition: transform 0.5s var(--premium-ease), border-color 0.5s ease;
+            isolation: isolate;
+        }
+
+        .chapter:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-mid);
+        }
+
+        .chapter::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, transparent, var(--gold-mid));
+            animation: rotate-border 4s linear infinite;
+            z-index: -2;
+        }
+
+        .chapter::after {
+            content: "";
+            position: absolute;
+            inset: 2px; 
+            background: var(--card-bg);
+            border-radius: 10px;
+            z-index: -1;
+        }
+
+        @keyframes rotate-border {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hover-overlay {
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-mid));
+            z-index: 0;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.8s var(--premium-ease);
+            pointer-events: none;
+        }
+
+        .chapter:hover .hover-overlay {
+            transform: scale(12);
+        }
+
+        .content-box {
+            position: relative;
+            z-index: 5;
+        }
+
+        .chapter-num {
+            display: block;
+            font-size: 1rem;
+            color: var(--gold-mid);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            font-weight: 600;
+            transition: all 0.4s var(--premium-ease);
+        }
+
+        .chapter-name {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #ffffff;
+            line-height: 1.3;
+            transition: color 0.4s var(--premium-ease), transform 0.6s var(--premium-ease);
+        }
+
+        .chapter:hover .chapter-num {
+            color: rgba(0,0,0,0.6);
+        }
+
+        .chapter:hover .chapter-name {
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        .reveal-line {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 40px;
+            height: 2px;
+            background: #000;
+            z-index: 5;
+            transition: transform 0.6s var(--premium-ease);
+        }
+
+        .chapter:hover .reveal-line {
+            transform: translateX(-50%) scaleX(1.5);
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                max-width: 98%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .chapter-name {
+            font-size: 1.7rem;
+            font-weight: 600;
+            }
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .main-title {
+                font-size: 3rem;
+            }
+            .torch-light {
+                width: 100%;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="torch-light"></div>
+        <h1 class="main-title">শ্রীমদ্ভগবদ্গীতা</h1>
+    </header>
+
+   <div class="container">
+        <div class="chapter">
+            <div class="hover-overlay"></div>
+            <div class="content-box">
+                <span class="chapter-num">প্রথম অধ্যায়</span>
+                <span class="chapter-name">অর্জুনবিষাদযোগ</span>
+            </div>
+            <div class="reveal-line"></div>
+        </div>
+
+        <div class="chapter">
+            <div class="hover-overlay"></div>
+            <div class="content-box">
+                <span class="chapter-num">দ্বিতীয় অধ্যায়</span>
+                <span class="chapter-name">সাংখ্যযোগ</span>
+            </div>
+            <div class="reveal-line"></div>
+        </div>
+
+        <div class="chapter">
+            <div class="hover-overlay"></div>
+            <div class="content-box">
+                <span class="chapter-num">তৃতীয় অধ্যায়</span>
+                <span class="chapter-name">কর্মযোগ</span>
+            </div>
+            <div class="reveal-line"></div>
+        </div>
+
+        <div class="chapter">
+            <div class="hover-overlay"></div>
+            <div class="content-box">
+                <span class="chapter-num">চতুর্থ অধ্যায়</span>
+                <span class="chapter-name">জ্ঞানকর্মসন্ন্যাসযোগ</span>
+            </div>
+            <div class="reveal-line"></div>
+        </div>
+
+        <div class="chapter">
+            <div class="hover-overlay"></div>
+            <div class="content-box">
+                <span class="chapter-num">পঞ্চম অধ্যায়</span>
+                <span class="chapter-name">কর্মসন্ন্যাসযোগ</span>
+            </div>
+            <div class="reveal-line"></div>
+        </div>
+
+        <div class="chapter">
+            <div class="hover-overlay"></div>
+            <div class="content-box">
+                <span class="chapter-num">ষষ্ঠ অধ্যায়</span>
+                <span class="chapter-name">আত্মসংযমযোগ</span>
+            </div>
+            <div class="reveal-line"></div>
+        </div>
+
+        <div class="chapter">
+            <div class="hover-overlay"></div>
+            <div class="content-box">
+                <span class="chapter-num">সপ্তম অধ্যায়</span>
+                <span class="chapter-name">জ্ঞানবিজ্ঞানযোগ</span>
+            </div>
+            <div class="reveal-line"></div>
+        </div>
+
+        <div class="chapter">
+            <div class="hover-overlay"></div>
+            <div class="content-box">
+                <span class="chapter-num">অষ্টম অধ্যায়</span>
+                <span class="chapter-name">অক্ষরব্রহ্মযোগ</span>
+            </div>
+            <div class="reveal-line"></div>
+        </div>
+
+        <div class="chapter">
+            <div class="hover-overlay"></div>
+            <div class="content-box">
+                <span class="chapter-num">নবম অধ্যায়</span>
+                <span class="chapter-name">রাজবিদ্যা-রাজগুহ্যযোগ</span>
+            </div>
+            <div class="reveal-line"></div>
+        </div>
+
+        <div class="chapter">
+            <div class="hover-overlay"></div>
+            <div class="content-box">
+                <span class="chapter-num">দশম অধ্যায়</span>
+                <span class="chapter-name">বিভূতিযোগ</span>
+            </div>
+            <div class="reveal-line"></div>
+        </div>
+
+        <div class="chapter">
+            <div class="hover-overlay"></div>
+            <div class="content-box">
+                <span class="chapter-num">একাদশ অধ্যায়</span>
+                <span class="chapter-name">বিশ্বরূপদর্শনযোগ</span>
+            </div>
+            <div class="reveal-line"></div>
+        </div>
+
+        <div class="chapter">
+            <div class="hover-overlay"></div>
+            <div class="content-box">
+                <span class="chapter-num">দ্বাদশ অধ্যায়</span>
+                <span class="chapter-name">ভক্তিযোগ</span>
+            </div>
+            <div class="reveal-line"></div>
+        </div>
+
+        <div class="chapter">
+            <div class="hover-overlay"></div>
+            <div class="content-box">
+                <span class="chapter-num">ত্রয়োদশ অধ্যায়</span>
+                <span class="chapter-name">ক্ষেত্রক্ষেত্রজ্ঞবিভাগযোগ</span>
+            </div>
+            <div class="reveal-line"></div>
+        </div>
+
+        <div class="chapter">
+            <div class="hover-overlay"></div>
+            <div class="content-box">
+                <span class="chapter-num">চতুর্দশ অধ্যায়</span>
+                <span class="chapter-name">গুণত্রয়বিভাগযোগ</span>
+            </div>
+            <div class="reveal-line"></div>
+        </div>
+
+        <div class="chapter">
+            <div class="hover-overlay"></div>
+            <div class="content-box">
+                <span class="chapter-num">পঞ্চদশ অধ্যায়</span>
+                <span class="chapter-name">পুরুষোত্তমযোগ</span>
+            </div>
+            <div class="reveal-line"></div>
+        </div>
+
+        <div class="chapter">
+            <div class="hover-overlay"></div>
+            <div class="content-box">
+                <span class="chapter-num">ষোড়শ অধ্যায়</span>
+                <span class="chapter-name">দৈবাসুরসম্পদ্বিভাগযোগ</span>
+            </div>
+            <div class="reveal-line"></div>
+        </div>
+
+        <div class="chapter">
+            <div class="hover-overlay"></div>
+            <div class="content-box">
+                <span class="chapter-num">সপ্তদশ অধ্যায়</span>
+                <span class="chapter-name">শ্রদ্ধাত্রয়বিভাগযোগ</span>
+            </div>
+            <div class="reveal-line"></div>
+        </div>
+
+        <div class="chapter">
+            <div class="hover-overlay"></div>
+            <div class="content-box">
+                <span class="chapter-num">অষ্টাদশ অধ্যায়</span>
+                <span class="chapter-name">মোক্ষসন্ন্যাসযোগ</span>
+            </div>
+            <div class="reveal-line"></div>
+        </div>
+    </div>
+
+</body>
+</html>
