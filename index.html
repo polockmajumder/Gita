@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@100..900&display=swap" rel="stylesheet">
+
+    <title>শ্রীমদ্ভগবদ্গীতা | গ্র্যান্ড সংস্করণ</title>
+    <style>
+        :root {
+            --bg-color: #000000; 
+            --card-bg: #0a0a0a;
+            --gold-light: #fcf6ba;
+            --gold-mid: #bf953f;
+            --gold-deep: #8A6D3B;
+            --premium-ease: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Noto Sans Bengali", sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px; 
+            width: 100%;
+        }
+
+        .main-title {
+            /* Balanced scaling for mobile and desktop */
+            font-size: clamp(2rem, 8vw, 5rem); 
+            font-weight: 900;
+            line-height: 1.4; 
+            background: linear-gradient(75deg, 
+                var(--gold-deep) 0%, 
+                var(--gold-mid) 25%, 
+                var(--gold-light) 50%, 
+                var(--gold-mid) 75%, 
+                var(--gold-deep) 100%);
+            background-size: 200% auto;
+            display: inline-block;
+            padding: 10px 5px; 
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 6s linear infinite;
+            filter: none; 
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .chapter {
+            position: relative;
+            background: var(--card-bg);
+            border: 1px solid rgba(191, 149, 63, 0.3); 
+            padding: 35px 25px;
+            text-align: center;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s var(--premium-ease);
+            opacity: 0;
+            animation: dropIn 0.8s var(--premium-ease) forwards;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+        }
+
+        @keyframes dropIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (hover: hover) {
+            .chapter:hover {
+                transform: translateY(-5px);
+                border-color: var(--gold-light);
+                background: #111;
+                box-shadow: 0 15px 40px rgba(191, 149, 63, 0.15);
+            }
+        }
+
+        .chapter-num {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--gold-mid);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .chapter-name {
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: #ffffff; 
+        }
+
+        .chapter:nth-child(n) { animation-delay: calc(var(--i) * 0.04s); }
+
+        @media (max-width: 480px) {
+            body { padding: 20px 15px; }
+            header { margin-bottom: 30px; }
+            .main-title { font-size: 2.2rem; } /* Specific fix for small mobile headers */
+            .container { grid-template-columns: 1fr; gap: 15px; } 
+            .chapter { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 class="main-title">শ্রীমদ্ভগবদ্গীতা</h1>
+    </header>
+
+    <div class="container">
+        <div class="chapter" style="--i:1"><span class="chapter-num">Chapter 01</span><span class="chapter-name">অর্জুনবিষাদ যোগ</span></div>
+        <div class="chapter" style="--i:2"><span class="chapter-num">Chapter 02</span><span class="chapter-name">সাংখ্য যোগ</span></div>
+        <div class="chapter" style="--i:3"><span class="chapter-num">Chapter 03</span><span class="chapter-name">কর্ম যোগ</span></div>
+        <div class="chapter" style="--i:4"><span class="chapter-num">Chapter 04</span><span class="chapter-name">জ্ঞানকর্মসন্ন্যাস যোগ</span></div>
+        <div class="chapter" style="--i:5"><span class="chapter-num">Chapter 05</span><span class="chapter-name">কর্মসন্ন্যাস যোগ</span></div>
+        <div class="chapter" style="--i:6"><span class="chapter-num">Chapter 06</span><span class="chapter-name">আত্মসংযম যোগ</span></div>
+        <div class="chapter" style="--i:7"><span class="chapter-num">Chapter 07</span><span class="chapter-name">জ্ঞানবিজ্ঞান যোগ</span></div>
+        <div class="chapter" style="--i:8"><span class="chapter-num">Chapter 08</span><span class="chapter-name">অক্ষরব্রহ্ম যোগ</span></div>
+        <div class="chapter" style="--i:9"><span class="chapter-num">Chapter 09</span><span class="chapter-name">রাজগুহ্য যোগ</span></div>
+        <div class="chapter" style="--i:10"><span class="chapter-num">Chapter 10</span><span class="chapter-name">বিভূতি যোগ</span></div>
+        <div class="chapter" style="--i:11"><span class="chapter-num">Chapter 11</span><span class="chapter-name">বিশ্বরূপদর্শন যোগ</span></div>
+        <div class="chapter" style="--i:12"><span class="chapter-num">Chapter 12</span><span class="chapter-name">ভক্তি যোগ</span></div>
+        <div class="chapter" style="--i:13"><span class="chapter-num">Chapter 13</span><span class="chapter-name">ক্ষেত্র-ক্ষেত্রজ্ঞ বিভাগ যোগ</span></div>
+        <div class="chapter" style="--i:14"><span class="chapter-num">Chapter 14</span><span class="chapter-name">গুণত্রয়বিভাগ যোগ</span></div>
+        <div class="chapter" style="--i:15"><span class="chapter-num">Chapter 15</span><span class="chapter-name">পুরুষোত্তম যোগ</span></div>
+        <div class="chapter" style="--i:16"><span class="chapter-num">Chapter 16</span><span class="chapter-name">দৈবাসুরসম্পদবিভাগ যোগ</span></div>
+        <div class="chapter" style="--i:17"><span class="chapter-num">Chapter 17</span><span class="chapter-name">শ্রদ্ধাত্রয়বিভাগ যোগ</span></div>
+        <div class="chapter" style="--i:18"><span class="chapter-num">Chapter 18</span><span class="chapter-name">মোক্ষসন্ন্যাস যোগ</span></div>
+    </div>
+
+</body>
+</html>
