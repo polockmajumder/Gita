@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@100..900&display=swap" rel="stylesheet">
+    <title>শ্রীমদ্ভগবদ্গীতা - অষ্টম অধ্যায়</title>
+    <style>
+        :root {
+    --bg-color: #000000; 
+    --card-bg: #0a0a0a;
+    --gold-light: #fcf6ba;
+    --gold-mid: #bf953f;
+    --gold-deep: #8a6d3b;
+    --smooth-curve: cubic-bezier(0.16, 1, 0.3, 1);
+    --sync-speed: 4s;
+}
+
+@keyframes revealEntrance {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Noto Sans Bengali", sans-serif;
+    -webkit-tap-highlight-color: #00000000;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 25px; 
+    width: 100%;
+    position: relative;
+    padding-top: 50px;
+    animation: revealEntrance 1s var(--smooth-curve) forwards;
+}
+
+.torch-light {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(circle at 50% 0%, rgba(252, 246, 186, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+    filter: blur(20px);
+}
+
+.main-title {
+    font-size: clamp(2.2rem, 8vw, 5rem);
+    font-weight: 800;
+    background: linear-gradient(to bottom, var(--gold-light), var(--gold-mid), var(--gold-deep));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.8));
+}
+
+.sub-header {
+    color: var(--gold-mid);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    opacity: 0;
+    animation: revealEntrance 1s var(--smooth-curve) 0.2s forwards;
+}
+
+.section-divider {
+    width: 90%;
+    height: 1px;
+    border: none;
+    background: radial-gradient(circle, var(--gold-light) 0%, transparent 90%);
+    margin: 10px auto 50px auto;
+    opacity: 0;
+    animation: revealEntrance 1s var(--smooth-curve) 0.3s forwards;
+}
+
+.container { width: 100%; max-width: 98%; z-index: 1; }
+
+.shloka-container { 
+    margin-bottom: 50px;
+    opacity: 0;
+    animation: revealEntrance 1.2s var(--smooth-curve) forwards;
+}
+
+.shloka-container:nth-child(1) { animation-delay: 0.4s; }
+.shloka-container:nth-child(2) { animation-delay: 0.5s; }
+.shloka-container:nth-child(3) { animation-delay: 0.6s; }
+.shloka-container:nth-child(n+4) { animation-delay: 0.7s; }
+
+.shloka-label {
+    text-align: center;
+    color: var(--gold-mid);
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.shloka-card {
+    background: var(--card-bg);
+    border: 1px solid #1a1a1a;
+    border-radius: 15px;
+    padding: 45px;
+    display: grid;
+    grid-template-columns: 1fr 2px 1fr;
+    gap: 50px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.8s var(--smooth-curve), 
+                box-shadow 0.8s var(--smooth-curve), 
+                border-color 0.8s ease;
+    cursor: pointer;
+}
+
+.shloka-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, #fcf6ba 0%, #ffdc74 100%);
+    z-index: 0;
+    clip-path: circle(0% at 50% 120%);
+    transition: clip-path 1.2s var(--smooth-curve);
+}
+
+.shloka-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    border-color: var(--gold-mid);
+}
+
+.shloka-card:hover::before { clip-path: circle(150% at 50% 100%); }
+
+@keyframes globalBreathe {
+    0%, 100% { opacity: 0.3; transform: scaleX(0.8); }
+    50% { opacity: 0.8; transform: scaleX(1.1); }
+}
+
+@keyframes verticalBreathe {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.85); }
+    50% { opacity: 0.7; transform: scaleY(1.05); }
+}
+
+.line-wrapper {
+    width: 60px; 
+    height: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    background-color: var(--gold-mid);
+    animation: globalBreathe var(--sync-speed) infinite ease-in-out;
+}
+
+.shloka-card:hover .line {
+    background-color: #000;
+    animation: none; 
+    opacity: 0.5;
+    transform: scaleX(1);
+}
+
+.vertical-divider {
+    background: linear-gradient(to bottom, transparent, var(--gold-mid), transparent);
+    height: 80%;
+    width: 1px;
+    align-self: center;
+    transition: all 0.8s var(--smooth-curve);
+    position: relative;
+    z-index: 2;
+    animation: verticalBreathe var(--sync-speed) infinite ease-in-out;
+}
+
+.shloka-card:hover .vertical-divider {
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6), transparent);
+    height: 110%;
+    width: 2px;
+    animation: none; 
+    transform: scaleY(1.1);
+    opacity: 0.9;
+}
+
+.content, .header-text {
+    position: relative; 
+    z-index: 2;
+    transition: color 0.6s var(--smooth-curve);
+}
+
+.content { color: #fcf6ba; line-height: 1.8; font-size: 1.2rem; text-align: center; }
+.header-text { font-size: 1.3rem;  color: var(--gold-mid); font-weight: 700; letter-spacing: 1px; }
+
+.shloka-card:hover .content { color: #111; }
+.shloka-card:hover .header-text { color: #000; }
+
+.column-header { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 20px; }
+
+@media (max-width: 768px) {
+    .sub-header { font-size: 1.4rem; }
+    .shloka-label { font-size: 1.2rem; }
+    .header-text { font-size: 1.1rem; }
+    .content { font-size: 1rem; line-height: 1.6; }
+    .shloka-card { grid-template-columns: 1fr; padding: 35px 20px; gap: 30px; }
+    .vertical-divider { 
+        width: 80%; height: 1px; margin: 0 auto; 
+        background: linear-gradient(to right, transparent, var(--gold-mid), transparent); 
+    }
+}
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="torch-light"></div>
+        <h1 class="main-title">শ্রীমদ্ভগবদ্গীতা</h1>
+    </header>
+
+    <div class="sub-header">
+        <span>অষ্টম অধ্যায়</span>
+        <span>{ অক্ষরব্রহ্মযোগ }</span>
+    </div>
+    <hr class="section-divider">
+
+    <div class="container">
+        
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ০১</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অর্জুন উবাচ: কিং তদ্ভ্রহ্ম কিমধ্যাত্মং কিং কর্ম পুরুষোত্তম। অধিভূতং চ কিং প্রোক্তমধিদৈবং কিমুচ্যতে।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অর্জুন বললেন—হে পুরুষোত্তম! ব্রহ্ম কি? অধ্যাত্ম কি? কর্ম কি? অধিভূত বলতে কি বোঝায়? আর অধিদৈবই বা কাকে বলা হয়?</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ০২</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অধিযজ্ঞঃ কথং কোঽত্র দেহেঽস্মিন্মধুসূদন। প্রয়াণকালে চ কথং জ্ঞেয়োঽসি নিয়তাত্মভিঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">হে মধুসূদন! এই দেহে অধিযজ্ঞ কে এবং তিনি কিভাবে অবস্থান করেন? আর মরণকালেই বা জিতেন্দ্রীয় পুরুষেরা কিভাবে আপনাকে জানতে পারেন?</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ০৩</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">শ্রীভগবানুবাচ: অক্ষরং ব্রহ্ম পরমং স্বভাবোঽধ্যাত্মমুচ্যতে। ভূতভাবোদ্ভবকরো বিসর্গঃ কর্মসংজ্ঞিতঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">পরমেশ্বর ভগবান বললেন—অবিনশ্বর পরম তত্ত্বই ব্রহ্ম; জীবের স্বরূপকে বলা হয় অধ্যাত্ম এবং প্রাণীদের উৎপত্তির কারণীভূত ত্যাগই কর্ম নামে অভিহিত।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ০৪</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অধিভূতং ক্ষরো ভাবঃ পুরুষশ্চাধিদৈবতম্। অধিযজ্ঞোঽহমেবাত্র দেহে দেহভৃতাং বর।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">হে দেহধারী শ্রেষ্ঠ অর্জুন! নশ্বর পদার্থসমূহ হচ্ছে অধিভূত; হিরণ্যগর্ভ বা বিরাট পুরুষ হচ্ছেন অধিদৈব এবং এই দেহে আমিই অন্তর্যামী রূপে অধিযজ্ঞ।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ০৫</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অন্তকালে চ মামেব স্মরন্মুক্ত্বা কলেবরম্। যঃ প্রয়াতি স মদ্ভাবং যাতি নাস্ত্যত্র সংশয়ঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অন্তিমকালে আমাকে স্মরণ করতে করতে দেহত্যাগ করে যে প্রয়াণ করেন, তিনি আমার স্বরূপ প্রাপ্ত হন—এতে কোন সন্দেহ নেই।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ০৬</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যং যং বাপি স্মরন্ভাবং ত্যজত্যন্তে কলেবরম্। তং তমেবৈতি কৌন্তেয় সদা তদ্ভাবভাবিতঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">হে কৌন্তেয়! মৃত্যুকালে মানুষ যে যে ভাব স্মরণ করে দেহত্যাগ করে, সে সেই ভাবই প্রাপ্ত হয়।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ০৭</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">তস্মাৎ সর্বেষু কালেষু মামনুস্মর যুধ্য চ। ময্যর্পিতমনোবুদ্ধির্মামেবৈষ্যস্যসংশয়ঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অতএব তুমি সর্বদাই আমাকে স্মরণ কর এবং যুদ্ধ কর। আমাতে মন ও বুদ্ধি অর্পণ করলে তুমি নিঃসন্দেহে আমাকেই প্রাপ্ত হবে।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ০৮</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অভ্যাসযোগযুক্তেন চেতসা নান্যগামিন। পরমং পুরুষং দিব্যং যাতি পার্থানুচিন্তয়ন্।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">হে পার্থ! অভ্যাসযোগের দ্বারা আমাতে একাগ্রচিত্ত হয়ে অন্য কোথাও বিক্ষিপ্ত না হয়ে যিনি দিব্য পরম পুরুষের চিন্তা করেন, তিনি তাঁকেই প্রাপ্ত হন।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ০৯</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">কবিং পুরাণমনুশাসিতারমণোরণীয়াংসমনুস্মরেদ্যঃ। সর্বস্য ধাতারমচিন্ত্যরূপমাদিত্যবর্ণং তমসঃ পরস্তাৎ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যিনি সর্বজ্ঞ, অনাদি, বিশ্বের নিয়ন্তা, সূক্ষ্মাতিসূক্ষ্ম, সকলের বিধাতা, অচিন্ত্যরূপ, সূর্যতুল্য জ্যোতির্ময় এবং অজ্ঞান-অন্ধকারের অতীত পরম পুরুষকে স্মরণ করেন—</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১০</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">প্রয়াণকালে মনসাঽচলেন ভক্ত্যা যুক্তো যোগবলেন চৈব। ভ্রুবোর্মধ্যে প্রাণমাবেশ্য সম্যক্ স তং পরং পুরুষমুপৈতি দিব্যম্।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">তিনি মৃত্যুকালে অচঞ্চল চিত্তে ভক্তিযুক্ত হয়ে যোগবল দ্বারা ভ্রুদ্বয়ের মধ্যে প্রাণবায়ুকে স্থাপন করে সেই দিব্য পরম পুরুষকে প্রাপ্ত হন।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১১</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যদক্ষরং বেদবিদো বদন্তি বিশন্তি যদ্যতয়ো বীতরাগাঃ। যদিচ্ছন্তো ব্রহ্মচর্যং চরন্তি তৎ তে পদং সংগ্রহেণ প্রবক্ষ্যে।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">বেদবিদেরা যাকে 'অক্ষর' বলেন, আসক্তিহীন সন্ন্যাসীরা যাতে প্রবেশ করেন এবং যা লাভের ইচ্ছায় ব্রহ্মচর্য পালন করা হয়, সেই পরম পদের কথা আমি তোমাকে সংক্ষেপে বলছি।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১২</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">সর্বদ্বারাণি সংযম্য মনো হৃদি নিরুধ্য চ। মূর্দ্ধ্ন্যাধায়াত্মনঃ প্রাণমাস্থিতো যোগধারণাম্।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">ইন্দ্রিয়লব্ধ জ্ঞানের সমস্ত দ্বার রুদ্ধ করে, মনকে হৃদয়ে নিরুদ্ধ করে এবং প্রাণবায়ুকে মস্তকে স্থাপন করে যোগধারণায় স্থিত হয়ে—</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১৩</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">ওমিত্যেকাক্ষরং ব্রহ্ম ব্যাহরন্মামনুস্মরন্। যঃ প্রয়াতি ত্যজন্দেহং স যাতি পরমাং গতিম্।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যিনি 'ওঁ' এই একাক্ষর ব্রহ্ম উচ্চারণ করতে করতে এবং আমাকে স্মরণ করতে করতে দেহত্যাগ করেন, তিনি পরম গতি লাভ করেন।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১৪</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অনন্যচেতাঃ সততং যো মাং স্মরতি নিত্যশঃ। তস্যাহং সুলভঃ পার্থ নিত্যযুক্তস্য যোগিনঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">হে পার্থ! যিনি অনন্যচিত্ত হয়ে সর্বদা আমাকে নিত্য স্মরণ করেন, সেই নিত্যযুক্ত যোগীর পক্ষে আমি সুলভ।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১৫</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">মামুপেত্য পুনর্জন্ম দুঃখালয়মশাশ্বতম্। নাপ্নুবন্তি মহাত্মানঃ সংসিদ্ধিং পরমাং গতাঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">আমাকে প্রাপ্ত হওয়ার পর মহাত্মারা আর এই দুঃখপূর্ণ নশ্বর জগতে পুনর্জন্ম লাভ করেন না, কারণ তাঁরা পরম সিদ্ধি লাভ করেছেন।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১৬</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">আব্ৰহ্মভুবনাল্লোকাঃ পুনরাবর্তিনোঽর্জুন। মামুপেত্য তু কৌন্তেয় পুনর্জন্ম ন বিদ্যতে।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">হে অর্জুন! ব্রহ্মলোক পর্যন্ত সমস্ত লোকই পুনরাবর্তনশীল; কিন্তু হে কৌন্তেয়! আমাকে প্রাপ্ত হলে আর পুনর্জন্ম হয় না।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১৭</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">সহস্রযুগপর্যন্তমহর্যদ্ব্রহ্মণো বিদুঃ। রাতিং যুগসহস্রান্তাং তেঽহোরাত্রবিদো জনাঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">মানুষের গণনায় এক হাজার যুগে ব্রহ্মার একদিন এবং এক হাজার যুগে তাঁর এক রাত্রি হয়—যাঁরা এটি জানেন, তাঁরাই কালতত্ত্ববিদ।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১৮</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অব্যক্তাদ্ব্যক্তয়ঃ সর্বাঃ প্রভবন্ত্যহরাগমে। রাত্র্যাগমে প্রলীয়ন্তে তত্রৈবাব্যক্তসংজ্ঞকে।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">ব্রহ্মার দিনের শুরুতে অব্যক্ত প্রকৃতি থেকে সমস্ত ব্যক্ত প্রাণীরা উৎপন্ন হয় এবং রাত্রির শুরুতে পুনরায় সেই অব্যক্তে লীন হয়।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১৯</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">ভূতগ্রামঃ স এবায়ং ভূত্বা ভূত্বা প্রলীয়তে। রাত্র্যাগমেঽবশঃ পার্থ প্রভবত্যহরাগমে।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">হে পার্থ! এই সমস্ত জীব বার বার জন্মগ্রহণ করে ব্রহ্মার রাত্রির শুরুতে বিলীন হয় এবং দিনের শুরুতে পুনরায় প্রকট হয়।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ২০</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">পরস্তস্মাত্তু ভাবোঽন্যোঽব্যক্তোঽব্যক্তাৎ সনাতনঃ। যঃ স সর্বেষু ভূতেষু নশ্যৎসু ন বিনশ্যতি।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">কিন্তু সেই অব্যক্ত প্রকৃতির অতীত আর একটি সনাতন অব্যক্ত ভাব আছে, যা সমস্ত প্রাণীর বিনাশ হলেও বিনাশ প্রাপ্ত হয় না।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ২১</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অব্যক্তোঽক্ষর ইত্যুক্তস্তমাহুঃ পরমাং গতিম্। যং প্রাপ্য ন নিবর্তন্তে তদ্ধাম পরমং মম।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যাকে অব্যক্ত ও অক্ষর বলা হয়, তাঁকেই পরম গতি বলা হয়। যা প্রাপ্ত হলে আর ফিরে আসতে হয় না, সেটিই আমার পরম ধাম।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ২২</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">পুরুষঃ স পরঃ পার্থ ভক্ত্যা লভ্যস্ত্বনন্যয়া। যস্যান্তঃস্থানি ভূতানি যেন সর্বমিদং ততম্।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">হে পার্থ! যাঁর মধ্যে সমস্ত প্রাণী অবস্থান করছে এবং যাঁর দ্বারা এই সমগ্র জগৎ পরিব্যাপ্ত, সেই পরম পুরুষকে একমাত্র অনন্য ভক্তির মাধ্যমেই লাভ করা যায়।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ২৩</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যত্র কালে ত্বনাবৃত্তিমাবৃত্তিঞ্চৈব যোগিনঃ। প্রয়াতা যান্তি তং কালং বক্ষ্যামি ভরতষভ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">হে ভরতষভ! যোগীরা যে কালে দেহত্যাগ করলে আর ফিরে আসেন না এবং যে কালে দেহত্যাগ করলে পুনরায় ফিরে আসেন, সেই কালের কথা আমি বলছি।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ২৪</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অগ্নির্জ্যোতিরহঃ শুক্লঃ ষণ্মাসা উত্তরায়ণম্। তত্র প্রয়াতা গচ্ছন্তি ব্রহ্ম ব্রহ্মবিদো জনাঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অগ্নি, জ্যোতি, দিন, শুক্লপক্ষ এবং উত্তরায়ণের ছয় মাস—এই কালে দেহত্যাগ করলে ব্রহ্মবিদেরা ব্রহ্মকে লাভ করেন।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ২৫</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">ধূমো রাত্রিস্তথা কৃষ্ণঃ ষণ্মাসা দক্ষিণায়নম্। তত্র চান্দ্রমসং জ্যোতিযোগী প্রাপ্য নিবর্ততে।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">ধূম, রাত্রি, কৃষ্ণপক্ষ এবং দক্ষিণায়নের ছয় মাস—এই কালে দেহত্যাগ করলে যোগী চন্দ্রজ্যোতি লাভ করে পুনরায় পৃথিবীতে ফিরে আসেন।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ২৬</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">শুক্লকৃষ্ণে গতী হ্যেতে জগতঃ শাশ্বতে মতে। একয়া যাত্যনাবৃত্তিমন্যয়াবর্ততে পুনঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">জগতের এই শুক্ল ও কৃষ্ণ গতি দুটি শাশ্বত। শুক্ল গতিতে গেলে আর ফিরে আসতে হয় না, কিন্তু কৃষ্ণ গতিতে গেলে পুনরায় ফিরে আসতে হয়।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ২৭</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">নৈতে সৃর্তী পার্থ জানন্ যোগী মুহ্যতি কশ্চন। তস্মাৎ সর্বেষু কালেষু যোগযুক্তো ভবার্জুন।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">হে পার্থ! এই দুটি গতির কথা জেনে কোনো যোগীই মোহগ্রস্ত হন না। অতএব হে অর্জুন! তুমি সর্বদা যোগযুক্ত হও।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ২৮</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">বেদেষু যজ্ঞেষু তপঃসু চৈব দানেষু যৎ পুণ্যফলং প্রদিষ্টম্। অত্যেতি তৎসর্বমিদং বিদিত্বা যোগী পরং স্থানমুপৈতি চাদ্যম্।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">বেদ পাঠে, যজ্ঞে, তপস্যায় ও দানে যে পুণ্যফল হয়, যোগী এই সমস্ত তত্ত্ব জেনে সেই ফল অতিক্রম করেন এবং আদি পরম পদ লাভ করেন।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+    <div class="shloka-label">উপসংহার</div>
+    <div class="shloka-card">
+        <div class="side">
+            <div class="column-header">
+                <div class="line-wrapper"><div class="line"></div></div>
+                <span class="header-text">অধ্যায় সমাপ্তি</span>
+                <div class="line-wrapper"><div class="line"></div></div>
+            </div>
+            <div class="content">ওঁ তৎসদিতি শ্রীমদ্ভগবদ্গীতাসূপনিষৎসু ব্রহ্মবিদ্যায়াম যোগশাস্ত্রে শ্রীকৃষ্ণার্জুনসংবাদে 'অক্ষরব্রহ্মযোগো' নাম অষ্টম অধ্যায়ঃ সমাপ্তঃ।</div>
+        </div>
+        <div class="vertical-divider"></div>
+        <div class="side">
+            <div class="column-header">
+                <div class="line-wrapper"><div class="line"></div></div>
+                <span class="header-text">শেষ কথা</span>
+                <div class="line-wrapper"><div class="line"></div></div>
+            </div>
+            <div class="content">এখানেই শ্রীমদ্ভগবদ্গীতার ‘অক্ষরব্রহ্মযোগ’ নামক অষ্টম অধ্যায় সমাপ্ত হলো।</div>
+        </div>
+    </div>
+</div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@100..900&display=swap" rel="stylesheet">
+    <title>শ্রীমদ্ভগবদ্গীতা - দ্বাদশ অধ্যায়</title>
+    <style>
+        :root {
+    --bg-color: #000000; 
+    --card-bg: #0a0a0a;
+    --gold-light: #fcf6ba;
+    --gold-mid: #bf953f;
+    --gold-deep: #8a6d3b;
+    --smooth-curve: cubic-bezier(0.16, 1, 0.3, 1);
+    --sync-speed: 4s;
+}
+
+/* New: Premium Entrance Keyframes */
+@keyframes revealEntrance {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Noto Sans Bengali", sans-serif;
+    -webkit-tap-highlight-color: #00000000;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 25px; 
+    width: 100%;
+    position: relative;
+    padding-top: 50px;
+    /* Added Reveal */
+    animation: revealEntrance 1s var(--smooth-curve) forwards;
+}
+
+.torch-light {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(circle at 50% 0%, rgba(252, 246, 186, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+    filter: blur(20px);
+}
+
+.main-title {
+    font-size: clamp(2.2rem, 8vw, 5rem);
+    font-weight: 800;
+    background: linear-gradient(to bottom, var(--gold-light), var(--gold-mid), var(--gold-deep));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.8));
+}
+
+.sub-header {
+    color: var(--gold-mid);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* Added Reveal with delay */
+    opacity: 0;
+    animation: revealEntrance 1s var(--smooth-curve) 0.2s forwards;
+}
+
+.section-divider {
+    width: 90%;
+    height: 1px;
+    border: none;
+    background: radial-gradient(circle, var(--gold-light) 0%, transparent 90%);
+    margin: 10px auto 50px auto;
+    opacity: 0;
+    animation: revealEntrance 1s var(--smooth-curve) 0.3s forwards;
+}
+
+.container { width: 100%; max-width: 98%; z-index: 1; }
+
+.shloka-container { 
+    margin-bottom: 50px;
+    /* Added Reveal for cards */
+    opacity: 0;
+    animation: revealEntrance 1.2s var(--smooth-curve) forwards;
+}
+
+/* Staggering the entrance of each shloka card */
+.shloka-container:nth-child(1) { animation-delay: 0.4s; }
+.shloka-container:nth-child(2) { animation-delay: 0.5s; }
+.shloka-container:nth-child(3) { animation-delay: 0.6s; }
+.shloka-container:nth-child(n+4) { animation-delay: 0.7s; }
+
+.shloka-label {
+    text-align: center;
+    color: var(--gold-mid);
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.shloka-card {
+    background: var(--card-bg);
+    border: 1px solid #1a1a1a;
+    border-radius: 15px;
+    padding: 45px;
+    display: grid;
+    grid-template-columns: 1fr 2px 1fr;
+    gap: 50px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.8s var(--smooth-curve), 
+                box-shadow 0.8s var(--smooth-curve), 
+                border-color 0.8s ease;
+    cursor: pointer;
+}
+
+.shloka-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, #fcf6ba 0%, #ffdc74 100%);
+    z-index: 0;
+    clip-path: circle(0% at 50% 120%);
+    transition: clip-path 1.2s var(--smooth-curve);
+}
+
+.shloka-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    border-color: var(--gold-mid);
+}
+
+.shloka-card:hover::before { clip-path: circle(150% at 50% 100%); }
+
+@keyframes globalBreathe {
+    0%, 100% { opacity: 0.3; transform: scaleX(0.8); }
+    50% { opacity: 0.8; transform: scaleX(1.1); }
+}
+
+@keyframes verticalBreathe {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.85); }
+    50% { opacity: 0.7; transform: scaleY(1.05); }
+}
+
+.line-wrapper {
+    width: 60px; 
+    height: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    background-color: var(--gold-mid);
+    animation: globalBreathe var(--sync-speed) infinite ease-in-out;
+}
+
+.shloka-card:hover .line {
+    background-color: #000;
+    animation: none; 
+    opacity: 0.5;
+    transform: scaleX(1);
+}
+
+.vertical-divider {
+    background: linear-gradient(to bottom, transparent, var(--gold-mid), transparent);
+    height: 80%;
+    width: 1px;
+    align-self: center;
+    transition: all 0.8s var(--smooth-curve);
+    position: relative;
+    z-index: 2;
+    animation: verticalBreathe var(--sync-speed) infinite ease-in-out;
+}
+
+.shloka-card:hover .vertical-divider {
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6), transparent);
+    height: 110%;
+    width: 2px;
+    animation: none; 
+    transform: scaleY(1.1);
+    opacity: 0.9;
+}
+
+.content, .header-text {
+    position: relative; 
+    z-index: 2;
+    transition: color 0.6s var(--smooth-curve);
+}
+
+.content { color: #fcf6ba; line-height: 1.8; font-size: 1.2rem; text-align: center; }
+.header-text { font-size: 1.3rem;  color: var(--gold-mid); font-weight: 700; letter-spacing: 1px; }
+
+.shloka-card:hover .content { color: #111; }
+.shloka-card:hover .header-text { color: #000; }
+
+.column-header { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 20px; }
+
+@media (max-width: 768px) {
+    .sub-header { font-size: 1.4rem; }
+    .shloka-label { font-size: 1.2rem; }
+    .header-text { font-size: 1.1rem; }
+    .content { font-size: 1rem; line-height: 1.6; }
+    .torch-light { width: 100%;}
+    .shloka-card { 
+        grid-template-columns: 1fr; 
+        padding: 35px 20px; 
+        gap: 30px; 
+    }
+    .vertical-divider { 
+        width: 80%; 
+        height: 1px; 
+        margin: 0 auto; 
+        background: linear-gradient(to right, transparent, var(--gold-mid), transparent); 
+        animation: globalBreathe var(--sync-speed) infinite ease-in-out;
+    }
+    .shloka-card:hover .vertical-divider { 
+        width: 100%; 
+        height: 2px; 
+        transform: scaleX(1); 
+        background: linear-gradient(to right, transparent, rgba(0,0,0,0.4), transparent);
+    }
+    .line-wrapper { width: 30px; }
+}
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="torch-light"></div>
+        <h1 class="main-title">শ্রীমদ্ভগবদ্গীতা</h1>
+    </header>
+
+    <div class="sub-header">
+        <span>দ্বাদশ অধ্যায়</span>
+        <span>{ ভক্তিযোগ }</span>
+    </div>
+    <hr class="section-divider">
+
+    <div class="container">
+        
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ০১</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অর্জুন উবাচ: এবং সততযুক্তা যে ভক্তাস্ত্বাং পর্যুপাসতে। যে চাপ্যক্ষরমব্যক্তং তেষাং কে যোগবিত্তমাঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অর্জুন জিজ্ঞাসা করলেন—যারা সর্বদাই আমাতে নিষ্ঠাবান হয়ে সাকার বিগ্রহের উপাসনা করেন এবং যারা ইন্দ্রিয়াতীত অব্যক্ত নির্বিশেষ ব্রহ্মের উপাসনা করেন, এই দুই প্রকার যোগীর মধ্যে কারা শ্রেষ্ঠ?</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ০২</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">শ্রীভগবানুবাচ: ময্যাবেশ্য মনো যে মাং নিত্যযুক্তা উপাসতে। শ্রদ্ধয়া পরয়োপেতাস্তে মে যুক্ততমা মতাঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">শ্রীভগবান বললেন—যারা আমার সাকার রূপে মন স্থির করে অত্যন্ত শ্রদ্ধার সাথে সর্বদা আমার উপাসনা করেন, তাঁদেরই আমি শ্রেষ্ঠ যোগী বলে মনে করি।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ০৩</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যে ত্বক্ষরমনির্দেশ্যমব্যক্তং পর্যুপাসতে। সর্বত্রগচিন্ত্যঞ্চ কূটস্থমচলং ধ্রুবম্।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">কিন্তু যাঁরা বাক্য ও মনের অতীত, অনির্দেশ্য, অব্যক্ত, সর্বব্যাপী, অচিন্ত্যনীয়, নির্বিকার, অচল ও শাশ্বত অক্ষরের উপাসনা করেন—</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ০৪</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">সংনিযম্যেন্দ্রিয়গ্রামং সর্বত্র সমবুদ্ধয়ঃ। তে প্রাপ্নুবন্তি মামেব সর্বভূতহিতে রতাঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">তাঁরা ইন্দ্রিয়সমূহকে সংযত করে এবং সর্বত্র সমবুদ্ধি সম্পন্ন হয়ে সমস্ত প্রাণীর কল্যাণে রত থেকে আমাকেই প্রাপ্ত হন।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ০৫</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">ক্লেশোঽধিকতরস্তেষামব্যক্তাসক্তচেতসাম্। অব্যক্তা হি গতির্দুঃখং দেহবদ্ভিরবাপ্যতে।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যাঁদের চিত্ত অব্যক্ত বা নির্বিশেষ ব্রহ্মে আসক্ত, তাঁদের কষ্ট অনেক বেশি; কারণ দেহধারীদের পক্ষে অব্যক্ত মার্গ অবলম্বন করা অত্যন্ত কঠিন।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ০৬</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যে তু সর্বাণি কর্মাণি ময়ি সংন্যস্য মৎপরাঃ। অনন্যেনৈব যোগেন মাং ধ্যায়ন্ত উপাসতে।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">কিন্তু যাঁরা সমস্ত কর্ম আমাতে অর্পণ করে মৎপরায়ণ হয়ে অনন্য ভক্তিযোগের দ্বারা আমারই ধ্যান ও উপাসনা করেন—</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ০৭</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">তেষামহং সমুদ্ধর্তা মৃত্যুসংসারসাগরাৎ। ভবামি নচিরাৎ পার্থ ময্যাবেশিতচেতসাম্।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">হে পার্থ! আমাতে নিবিষ্টচিত্ত সেই ভক্তদের আমি অচিরেই এই জন্ম-মৃত্যুরূপ সংসার-সাগর থেকে উদ্ধার করি।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ০৮</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">ময্যেব মন আধত্স্ব ময়ি বুদ্ধিং নিবেশয়। নিবসিষ্যসি ময্যেব অত ঊর্ধ্বং ন সংশয়ঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">তুমি আমাতেই মন স্থির করো এবং আমাতেই তোমার বুদ্ধি অর্পণ করো। তাহলে তুমি দেহান্তে আমাতেই বাস করবে, এ বিষয়ে কোন সন্দেহ নেই।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ০৯</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অথ চিত্তং সমাধাতুং ন শক্নোষি ময়ি স্থিরম্। অভ্যাসযোগেন ততো মামিচ্ছাপ্তুং ধনঞ্জয়।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">হে ধনঞ্জয়! যদি তুমি আমাতে মন স্থির করতে সমর্থ না হও, তবে অভ্যাসযোগের দ্বারা আমাকে প্রাপ্ত হতে ইচ্ছা করো।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১০</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অভ্যাসেঽপ্যসমর্থোঽসি মৎকর্মপরমো ভব। মদর্থমপি কর্মাণি কুর্বন সিদ্ধিমবাপ্স্যসি।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যদি তুমি অভ্যাসেও অসমর্থ হও, তবে মদীয় কর্মে (আমার সন্তুষ্টির জন্য কর্মে) তৎপর হও। আমার জন্য কর্ম সম্পাদন করেও তুমি সিদ্ধি লাভ করবে।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১১</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অথৈতদপ্যশক্তোঽসি কর্তুং মদ্যোগমাশ্রিতঃ। সর্বকর্মফলত্যাগং ততঃ কুরু যতাত্মবান্।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যদি তুমি এটিও করতে অসমর্থ হও, তবে তুমি সংযতচিত্ত হয়ে আমার শরণাগত হও এবং সমস্ত কর্মের ফল ত্যাগ করো।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১২</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">শ্রেয়ো হি জ্ঞানমভ্যাসাজ্জ্ঞানাদ্ব ধ্যানং বিশিষ্যতে। ধ্যানাৎ কর্মফলত্যাগস্ত্যাগাচ্ছান্তিরনন্তরম্।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অবুঝের মতো অভ্যাস করার চেয়ে জ্ঞান লাভ করা ভালো; জ্ঞান অপেক্ষা ধ্যান শ্রেষ্ঠ; আর ধ্যান অপেক্ষা কর্মফল ত্যাগ শ্রেষ্ঠ, কারণ ত্যাগের মাধ্যমেই পরম শান্তি লাভ হয়।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১৩</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অদ্বেষ্টা সর্বভূতানাং মৈত্রঃ করুণ এব চ। নির্মমো নিরহঙ্কারঃ সমদুঃখসুখঃ ক্ষমী।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যিনি সমস্ত প্রাণীর প্রতি দ্বেষহীন, মৈত্রভাবাপন্ন ও দয়ালু, মমতাশূন্য, অহঙ্কারমুক্ত, সুখে-দুঃখে অবিচলিত এবং ক্ষমাশীল—</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১৪</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">সন্তুষ্টঃ সততং যোগী যতাত্মা দৃঢ়নিশ্চয়ঃ। ময্যর্পিতমনোবুদ্ধির্যো মদ্ভক্তঃ স মে প্রিয়ঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">সেই যোগী সর্বদাই সন্তুষ্ট, সংযতচিত্ত এবং আমাতে সুদৃঢ় সংকল্প। যিনি আমাতে মন ও বুদ্ধি অর্পণ করেছেন, সেই ভক্তই আমার প্রিয়।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১৫</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যস্মান্নোদ্বিজতে লোকো লোকান্নোদ্বিজতে চ যঃ। হর্ষামর্ষভয়োদ্বেগৈর্মুক্তো যঃ স চ মে প্রিয়ঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যাঁর দ্বারা কেউ উদ্বিগ্ন হয় না এবং যিনি অন্যের দ্বারাও উদ্বিগ্ন হন না; যিনি আনন্দ, বিষাদ, ভয় ও উদ্বেগ থেকে মুক্ত, তিনি আমার প্রিয়।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১৬</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">অনপেক্ষঃ শুচির্দক্ষ উদাসীনো গতব্যথঃ। সর্বারম্ভপরিত্যাগী যো মদ্ভক্তঃ স মে প্রিয়ঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যিনি আকাঙ্ক্ষাহীন, পবিত্র, দক্ষ, পক্ষপাতহীন ও দুশ্চিন্তামুক্ত এবং যিনি সমস্ত কর্মের ফল ত্যাগী, সেই ভক্ত আমার অত্যন্ত প্রিয়।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১৭</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যো ন হৃষ্যতি ন দ্বেষ্টি ন শোচতি ন কাঙ্ক্ষতি। শুভাশুভপরিত্যাগী ভক্তিমান্ যঃ স মে প্রিয়ঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যিনি অতি হর্ষিত হন না, দ্বেষ করেন না, শোক করেন না, আবার কোনো কিছুর আকাঙ্ক্ষাও করেন না এবং যিনি শুভ ও অশুভ উভয় প্রকার ফল ত্যাগ করেছেন, সেই ভক্তিমান ব্যক্তি আমার প্রিয়।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১৮</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">সমঃ শত্রৌ চ মিত্রে চ তথা মানাপমানয়োঃ। শীতোষ্ণসুখদুঃখেষু সমঃ সঙ্গবিবর্জিতঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যিনি শত্রু ও মিত্রে সমভাবাপন্ন এবং সম্মান ও অপমানে নির্বিকার; যিনি শীত-উষ্ণ ও সুখ-দুঃখে অবিচলিত এবং আসক্তিহীন—</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ১৯</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">তুল্যনিন্দাস্তুতির্মৌনী সন্তুষ্টো যেন কেনচিৎ। অনিকেতঃ স্থিরমতির্ভক্তিমান্ মে প্রিয়ো নরঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যিনি নিন্দা ও স্তুতিতে সমবুদ্ধি সম্পন্ন, মৌনব্রতধারী, যা পাওয়া যায় তাতেই সন্তুষ্ট, যাঁর কোনো নির্দিষ্ট গৃহ নেই এবং যাঁর বুদ্ধি আমাতে স্থির—সেই ভক্তিমান ব্যক্তিই আমার অতি প্রিয়।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+            <div class="shloka-label">শ্লোক ২০</div>
+            <div class="shloka-card">
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">সংস্কৃত</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">যে তু ধর্মামৃতমিদং যথোক্তং পর্যুপাসতে। শ্রদ্ধধানা মৎপরমা ভক্তাস্তেঽতীব মে প্রিয়াঃ।।</div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="side">
+                    <div class="column-header">
+                        <div class="line-wrapper"><div class="line"></div></div>
+                        <span class="header-text">বাংলা অর্থ</span>
+                        <div class="line-wrapper"><div class="line"></div></div>
+                    </div>
+                    <div class="content">কিন্তু যাঁরা এই বর্ণিত অমৃতময় ধর্মোপদেশ শ্রদ্ধার সাথে অনুসরণ করেন এবং আমাকেই পরম লক্ষ্য হিসেবে গ্রহণ করেন, সেই ভক্তরা আমার অত্যন্ত প্রিয়।</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shloka-container">
+    <div class="shloka-label">উপসংহার</div>
+    <div class="shloka-card">
+        <div class="side">
+            <div class="column-header">
+                <div class="line-wrapper"><div class="line"></div></div>
+                <span class="header-text">অধ্যায় সমাপ্তি</span>
+                <div class="line-wrapper"><div class="line"></div></div>
+            </div>
+            <div class="content">ওঁ তৎসদিতি শ্রীমদ্ভগবদ্গীতাসূপনিষৎসু ব্রহ্মবিদ্যায়াম যোগশাস্ত্রে শ্রীকৃষ্ণার্জুনসংবাদে 'ভক্তিযোগো' নাম দ্বাদশ অধ্যায়ঃ সমাপ্তঃ।</div>
+        </div>
+        <div class="vertical-divider"></div>
+        <div class="side">
+            <div class="column-header">
+                <div class="line-wrapper"><div class="line"></div></div>
+                <span class="header-text">শেষ কথা</span>
+                <div class="line-wrapper"><div class="line"></div></div>
+            </div>
+            <div class="content">এখানেই শ্রীমদ্ভগবদ্গীতার ‘ভক্তিযোগ’ নামক দ্বাদশ অধ্যায় সমাপ্ত হলো।</div>
+        </div>
+    </div>
+</div>
+
+    </div>
+</body>
+</html>
